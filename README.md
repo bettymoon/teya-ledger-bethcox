@@ -1,6 +1,8 @@
 # teya-ledger-bethcox
 
 ## How to Run
+This code is written in Java 17.
+
 Please open the project root (teya-ledger-bethcox) and run:
 ```
 mvn clean package

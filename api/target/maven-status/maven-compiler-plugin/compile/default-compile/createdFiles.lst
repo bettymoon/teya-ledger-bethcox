@@ -1,5 +1,0 @@
-com\teya\LedgerApplication.class
-com\teya\config\LedgerConfig.class
-com\teya\request\DepositRequest.class
-com\teya\controller\LedgerController.class
-com\teya\request\WithdrawalRequest.class

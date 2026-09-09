@@ -34,6 +34,8 @@ public class LedgerService {
         return account.getBalance();
     }
 
+    //because we are returning a long and it cannot be nullified, I have chosen to return -1L as negative balances
+    // are not deemed allowed
     public long getBalance(UUID accountId) {
         Account account = getAccount(accountId);
         return account == null ? -1L : account.getBalance();

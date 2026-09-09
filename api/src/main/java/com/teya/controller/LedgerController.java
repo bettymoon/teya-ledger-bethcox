@@ -67,7 +67,7 @@ public class LedgerController {
     }
 
     @GetMapping("/balance")
-    public Map<String, Object> getBalance(@RequestParam String accountId) {
+    public Map<String, Object> getBalance(@RequestHeader String accountId) {
         if(accountId == null || accountId.isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Account Id must be provided.");
 
@@ -83,7 +83,7 @@ public class LedgerController {
     }
 
     @GetMapping("/transactions")
-    public List<Transaction> getTransactions(@RequestParam String accountId) {
+    public List<Transaction> getTransactions(@RequestHeader String accountId) {
         if(accountId == null || accountId.isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Account Id must be provided.");
         if(service.getAccount(UUID.fromString(accountId)) == null)

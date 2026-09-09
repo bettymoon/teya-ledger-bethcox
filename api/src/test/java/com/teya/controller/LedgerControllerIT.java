@@ -91,7 +91,7 @@ public class LedgerControllerIT {
         when(ledgerService.getAccount(any(UUID.class))).thenReturn(new Account("John Doe"));
         when(ledgerService.getBalance(any(UUID.class))).thenReturn(1000L);
 
-        mock.perform(get("/api/ledger/balance").param("accountId", UUID.randomUUID().toString()))
+        mock.perform(get("/api/ledger/balance").header("accountId", UUID.randomUUID().toString()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.balance").value(1000));
     }
@@ -103,7 +103,7 @@ public class LedgerControllerIT {
                 new Transaction(TransactionType.DEPOSIT, 100),
                 new Transaction(TransactionType.WITHDRAWAL, 50)));
 
-        mock.perform(get("/api/ledger/transactions").param("accountId", UUID.randomUUID().toString()))
+        mock.perform(get("/api/ledger/transactions").header("accountId", UUID.randomUUID().toString()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].transactionId").exists())
                 .andExpect(jsonPath("$[0].transactionType").value("DEPOSIT"))
@@ -258,13 +258,13 @@ public class LedgerControllerIT {
     void tryToGetBalanceFromAccountThatDoesntExistAppropriateErrorMessageIsReturned() throws Exception {
         when(ledgerService.getAccount(any(UUID.class))).thenReturn(null);
 
-        mock.perform(get("/api/ledger/balance").param("accountId", UUID.randomUUID().toString()))
+        mock.perform(get("/api/ledger/balance").header("accountId", UUID.randomUUID().toString()))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     void tryToGetBalanceSendingEmptyRequestAppropriateErrorMessageIsReturned() throws Exception {
-        mock.perform(get("/api/ledger/balance").param("accountId", ""))
+        mock.perform(get("/api/ledger/balance").header("accountId", ""))
                 .andExpect(status().isBadRequest());
     }
 
@@ -272,14 +272,14 @@ public class LedgerControllerIT {
     void tryToGetTransactionsForAccountThatDoesntExistAppropriateErrorMessageIsReturned() throws Exception {
         when(ledgerService.getAccount(any(UUID.class))).thenReturn(null);
 
-        mock.perform(get("/api/ledger/transactions").param("accountId", UUID.randomUUID().toString()))
+        mock.perform(get("/api/ledger/transactions").header("accountId", UUID.randomUUID().toString()))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     void tryToGetTransactionsButNoAccountIdProvidedAppropriateErrorMessageIsReturned() throws Exception {
 
-        mock.perform(get("/api/ledger/transactions").param("accountId", ""))
+        mock.perform(get("/api/ledger/transactions").header("accountId", ""))
                 .andExpect(status().isBadRequest());
     }
 }

@@ -131,7 +131,9 @@ Example Response:
 ```
 
 # Assumptions & Need to Fixes
-I made this as a bare basic API, without a lot of authorisation and safety marking. It assumes that there is additional security methods to prevent malicious usage.
+I made this as a bare basic API, without a lot of authorisation and safety marking. It assumes that there is additional security methods to prevent malicious usage. 
+
+I have used UUID to generate identifiers for Accounts and Transactions, but I would assume that a company has some way of generating these internally.
 
 For the GET calls I have passed the AccountId as a header rather than a parameter, this avoid the URL from being used maliciously. 
 

@@ -139,6 +139,8 @@ For the GET calls I have passed the AccountId as a header rather than a paramete
 
 I would also like to create custom exceptions which give end users detailed messages as to why their calls failed. For the time being I have relied on the normal HTTP Responses to respond to incorrect requests.
 
+This is also bare basic Java and does not include any other language that would be necessary for running in a production environment. 
+
 # Testing
 
 I followed TDD and the main testing for the Controller can be found in LedgerControllerIT however, ideally I would have also create Unit Tests for the Service class. I would also implement e2e testing using a tool like Xray to ensure that there is backwards compatibility going forward.
